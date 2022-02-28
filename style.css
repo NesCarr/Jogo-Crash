@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-white: white;
+}
+
+body {
+  background: #161616;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.2s ease;
+  font-family: sans-serif;
+  color: var(--color-white);
+}
+
+a:hover {
+  color: #09d;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+#logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header {
+  height: 70px;
+  padding: 1rem;
+  display: flex;
+  color: var(--color-white);
+  background-color: #262626;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.1rem solid #09d;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.menu a {
+  display: block;
+  padding: 0.5rem;
+}
+
+.crash {
+  position: relative;
+  left: 10rem;
+  top: 1.5rem;
+  flex-wrap: wrap;
+  height: 25rem;
+  width: 70%;
+  background: #262626;
+  color: white;
+  font-family: sans-serif;
+  border-radius: 5px 0px;
+}
+
+.opcao {
+  display: flex;
+  padding: 0.25rem;
+}
+
+#btn-space,
+#btn-pace {
+  padding: 1rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  height: 0%;
+}
+
+#btn-space:hover,
+#btn-pace:hover {
+  background: #161616;
+  height: 0%;
+  border-radius: 5px;
+}
+
+.quantia {
+  position: absolute;
+  top: 3.7rem;
+  width: 20.9%;
+  background-color: #161616;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  color: white;
+  font-family: sans-serif;
+  height: 10%;
+  padding: 0.25rem;
+}
+
+.grafico {
+  display: flex;
+  padding: 0.25rem;
+  background: #161616;
+  width: 100%;
+  height: 23rem;
+  border-radius: 5px 0px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comecar {
+  position: absolute;
+  top: 6.7rem;
+  width: 20.9%;
+  border-radius: 5px;
+  height: 10%;
+  padding: 0.25rem;
+  background-color: #f12c4c;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
