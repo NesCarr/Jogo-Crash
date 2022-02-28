@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #d1495b;
+  --secondary-color: #edae49;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +25,7 @@ a {
 }
 
 a:hover {
-  color: #09d;
+  color: var(--secondary-color);
   background: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
@@ -38,7 +43,7 @@ a:hover {
   background-color: #262626;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 0.1rem solid #09d;
+  border-bottom: 0.1rem solid var(--secondary-color);
 }
 
 .menu {
@@ -117,7 +122,7 @@ a:hover {
   border-radius: 5px;
   height: 10%;
   padding: 0.25rem;
-  background-color: #f12c4c;
+  background-color: var(--primary-color);
   border: none;
   color: white;
   cursor: pointer;
