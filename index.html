@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nescard - Crash</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
   </head>
+
   <body>
     <header class="header">
       <a id="logo" href="#">Nescard</a>
@@ -20,11 +24,111 @@
 
     <div class="crash">
       <div class="opcao">
-        <div id="btn-pace" >Normal</div>
+        <div id="btn-pace">Normal</div>
         <div id="btn-space">Demo</div>
-        <input class="quantia" type="number" name="value" placeholder="Quantia">
-        <div class="grafico"></div>
-        <input class="comecar" type="submit" name="Começar" title="Começar">
+        <input class="quantia" type="text" name="value" placeholder="Quantia">
+        <div class="grafico">
+          <h1 id="percentage_crash">
+            1.00%
+          </h1>
+        </div>
+        <button class="comecar" id="apostar" type="button" name="Começar" title="Começar">
+          Apostar
+        </button>
       </div>
+      <div>
+        <ul id="historico">
+
+        </ul>
+      </div>
+
+      <script type="module" src="./scripts/chart.js"></script>
+
+      <script>
+        let crashPercentageElement = document.getElementById('percentage_crash');
+        const botaoApostarElement = document.getElementById('apostar');
+        const historicoElement = document.getElementById('historico');
+        let entrouNaAposta = false;
+
+        //CONFIG DO JOGO
+        const RESULTADO_DO_JOGO = 1.04;
+        const VELOCIDADE_DO_JOGO = 400;
+        let porcentagemDoCrash = 1.00;
+
+        botaoApostarElement.addEventListener('click', () => {
+          !entrouNaAposta ? apostar() : sairDaApost();
+        })
+
+
+        function sairDaApost() {
+          alert('Você saiu da aposta');
+          entrouNaAposta = false;
+        }
+
+        //Faz aposta
+        function apostar() {
+          const valorDaAposta = (document.querySelector('.quantia').value);
+
+          if (valorDaAposta <= 1.0) {
+            alert('Aposta muito pequena');
+            return;
+          }
+
+          entrouNaAposta = true;
+
+          const crash = setInterval(() => {
+
+            porcentagemDoCrash += 0.01;
+            crashPercentageElement.innerHTML = porcentagemDoCrash.toFixed(2) + '%';
+
+            //Verifica se ganhou
+            if (porcentagemDoCrash == valorDaAposta && porcentagemDoCrash < RESULTADO_DO_JOGO) {
+              entrouNaAposta = false;
+              alert('Você ganhou!');
+              adicionarAoHistorico('GANHOU', porcentagemDoCrash, valorDaAposta)
+              return;
+            }
+
+            //Verifica se perdeu
+            if (porcentagemDoCrash >= RESULTADO_DO_JOGO && entrouNaAposta) {
+              alert('você perdeu');
+              entrouNaAposta = false;
+              adicionarAoHistorico('CRASHOU', porcentagemDoCrash, valorDaAposta);
+              return;
+            }
+            //Verifica o jogo acabou
+            if (porcentagemDoCrash >= RESULTADO_DO_JOGO) {
+              alert('CRASH')
+              clearInterval(crash);
+              resetarJogo();
+              return;
+            }
+
+          }, VELOCIDADE_DO_JOGO)
+
+        }
+
+        function resetarJogo() {
+          porcentagemDoCrash = 1.00;
+          crashPercentageElement.innerHTML = '1.00%'
+          entrouNaAposta = false;
+        }
+
+        function adicionarAoHistorico(titulo, percentage, valorDaAposta) {
+          historicoElement.innerHTML += `
+              <li>
+                <span>
+                  ${titulo} ${percentage.toFixed(2)}%
+                  </span> 
+                  <span>
+                   Você apostou - ${valorDaAposta}%
+                  </span>
+              </li>`;
+        }
+
+
+      </script>
+
   </body>
+
 </html>
